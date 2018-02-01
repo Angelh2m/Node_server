@@ -1,0 +1,1 @@
+module.exports.SEED = '@CusToM-SeCrET_!KEy!';

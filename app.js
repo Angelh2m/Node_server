@@ -1,10 +1,22 @@
-// Requires
-let express = require('express');
-
+// Requerimientos
+const express = require('express');
+const bodyParser = require('body-parser');
 // Inicializar variables
-let app = express();
+const app = express();
+
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+    // parse application/json
+app.use(bodyParser.json())
+
 // Mongoose
 const mongoose = require('mongoose');
+
+// Import routes
+const appRoutes = require('./routes/app');
+const usuarioRoutes = require('./routes/usuario');
+const loginRoutes = require('./routes/login');
 
 
 
@@ -16,15 +28,11 @@ mongoose.connect('mongodb://localhost:27017/hospitalDB',
         console.log('Base de tados: \x1b[32m%s\x1b[0m', 'Online');
     });
 
-// Rutas
 
-app.get('/', (req, res, next) => {
-    res.status(200).json({
-        ok: true,
-        mensaje: 'Peticion realizada correctamente'
-    });
-});
-
+// Routes
+app.use('/usuario', usuarioRoutes);
+app.use('/login', loginRoutes);
+app.use('/', appRoutes);
 
 
 // Escuchar peticiones
