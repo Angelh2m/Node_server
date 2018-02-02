@@ -18,7 +18,7 @@ app.get('/', (req, res, next) => {
     desde = Number(desde);
     // Use the Mongo Schema / Find the user
     // Display only declared fields
-    Usuario.find({}, 'nombre email imagen role')
+    Usuario.find({}, 'nombre email imagen img role')
         .skip(desde)
         .limit(5)
         .exec(
